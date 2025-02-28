@@ -1,24 +1,3 @@
-package kp;
-
-import kp.cdi.ResearchCDIStarter;
-import kp.restful.ResearchRestful;
-import kp.util.LoggingFormatter;
-import kp.validation.ResearchValidation;
-
-import javax.swing.*;
-import java.lang.invoke.MethodHandles;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.logging.Handler;
-import java.util.logging.Logger;
-
-/**
- * Swing application.
- */
-public class Application {
-    private static final Logger logger = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
 
     private static final List<String> MENU_LIST = List.of("Validation", "CDI", "RESTful Web Services", "Exit");
 
