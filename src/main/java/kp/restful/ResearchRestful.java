@@ -1,0 +1,81 @@
+package kp.restful;
+
+import kp.restful.client.BoxesClient;
+import kp.restful.client.ContentClient;
+import kp.restful.data.SetOfBoxes;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
+
+import java.io.IOException;
+import java.lang.invoke.MethodHandles;
+import java.net.URI;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Research Jakarta RESTful Web Services using JDK HTTP Server.
+ * <p>
+ * <a href="https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest3x/index.html">
+ * Jersey User Guide</a>
+ * </p>
+ */
+public class ResearchRestful {
+    private static final Logger logger = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
+
+    private static final URI ROOT_URI = URI.create("http://localhost:8080/");
+    private static final ResourceConfig RESOURCE_CONFIG = new ResourceConfig().packages("kp.restful.data");
+    private static final String PROMPT_MESSAGE = """
+            pause():
+            *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+            *** Start "02 CURL call server.bat".
+            *** After that batch run ends, press the 'Enter' in this window to shutdown server.
+            """;
+
+    /**
+     * Runs HTTP servers.
+     * <p>
+     * With 'GrizzlyHttpServerFactory' creates the HttpServer instance configured as a Jersey container.
+     * </p>
+     */
+    public void process() {
+        while (true) {
+            int chosenOption = ResearchRestfulHelper.showButtons();
+            if (chosenOption != 0 && chosenOption != 1 && chosenOption != 2) {
+                break;
+            }
+            final HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(ROOT_URI, RESOURCE_CONFIG);
+            ResearchRestfulHelper.clearReport();
+            switch (chosenOption) {
+                case 0 -> {
+                    ContentClient.process();
+                    ResearchRestfulHelper.showContentResults();
+                }
+                case 1 -> {
+                    SetOfBoxes.reset();
+                    BoxesClient.process();
+                    ResearchRestfulHelper.showBoxesResults();
+                }
+                case 2 -> {
+                    SetOfBoxes.reset();
+                    ResearchRestfulHelper.setNumber(1);
+                    pause();
+                    ResearchRestfulHelper.showBoxesExternalResults();
+                }
+            }
+            httpServer.shutdownNow();
+        }
+    }
+
+    /**
+     * Pause this application for running 'curl' in external batch.
+     */
+    private static void pause() {
+
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(PROMPT_MESSAGE);
+        }
+        new Scanner(System.in).nextLine();
+    }
+}
