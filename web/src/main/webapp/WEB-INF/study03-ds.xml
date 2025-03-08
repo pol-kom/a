@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data source: -->
+<!-- - unmanaged -->
+<!-- - uses H2 in-memory database with name 'study13' -->
+<!-- - referenced in META-INF/persistence.xml -->
+<!-- - bound into JNDI at this location -->
+<!-- -->
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+	<datasource jndi-name="java:jboss/datasources/Study13DS"
+		pool-name="greeter-quickstart" enabled="true" use-java-context="true">
+		<connection-url>jdbc:h2:mem:study13;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1</connection-url>
+		<driver>h2</driver>
+		<security>
+			<user-name>sa</user-name>
+			<!-- this password is the security hot spot in 'SonarQube' -->
+			<password>sa</password>
+		</security>
+	</datasource>
+</datasources>
