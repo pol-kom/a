@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>kp</groupId>
+	<artifactId>Study13</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+
+	<modules>
+		<module>common</module>
+		<module>ejb</module>
+		<module>web</module>
+		<module>ear</module>
+	</modules>
+
+	<properties>
+		<maven.compiler.release>23</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jboss.hostname>127.0.0.1</jboss.hostname>
+		<jboss.username>admin</jboss.username>
+		<jboss.password>mikimiki</jboss.password>
+		<jboss.port>9990</jboss.port>
+	
+		<jakarta.enterprise.cdi-api.version>4.1.0</jakarta.enterprise.cdi-api.version>
+	    <jakarta.jakartaee-api.version>11.0.0-M5</jakarta.jakartaee-api.version>
+		<jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
+		<maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+		<maven-ear-plugin.version>3.3.0</maven-ear-plugin.version>
+		<maven-ejb-plugin.version>3.2.1</maven-ejb-plugin.version>
+		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+		<maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+		<wildfly-maven-plugin.version>5.1.2.Final</wildfly-maven-plugin.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.wildfly.plugins</groupId>
+					<artifactId>wildfly-maven-plugin</artifactId>
+					<version>${wildfly-maven-plugin.version}</version>
+					<!-- Plugin configured to skip deployment for all modules. -->
+					<!-- Then enabled only in the ear module. -->
+					<configuration>
+						<skip>true</skip>
+						<hostname>${jboss.hostname}</hostname>
+						<username>${jboss.username}</username>
+						<password>${jboss.password}</password>
+						<port>${jboss.port}</port>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc-plugin.version}</version>
+					<configuration>
+						<outputDirectory>${basedir}/docs</outputDirectory>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
