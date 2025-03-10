@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" lang="en" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Study14 RESTful Web Services</title>
+	</head>
+	<body>
+		<h:form>
+		<table style="width:100%"><caption/><tr>
+		<th/>
+		<td style="border:2px solid red">
+			<h:commandButton action="#{rsManagedBean.researchRestfulWebService}"
+				value="RESTful Web Service" />
+		</td><td style="border:2px solid magenta">
+			<a href="rs/text/">RESTful Web Service</a>
+		</td><td style="border:2px solid black">
+			<a href="javascript:window.location.href=window.location.href">Reload Report</a>
+		</td><td style="border:2px solid black">
+			<h:commandLink action="#{report.clear}" value="Clear Report" />
+		</td><td style="border:2px solid black">
+			<a href="index.html">Index</a>
+		</td>
+		</tr></table>
+		</h:form>
+		<h:dataTable frame="box" rules="all" rendered="#{not empty report}" value="#{report}" var="line" >
+			<h:column>#{line}</h:column>
+		</h:dataTable>
+	</body>
+</html>
