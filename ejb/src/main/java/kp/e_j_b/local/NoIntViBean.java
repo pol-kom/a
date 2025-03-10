@@ -14,8 +14,7 @@ import java.util.logging.Logger;
  * <p>
  * Because this enterprise bean class does not implement a business interface,
  * the enterprise bean exposes a <b>local</b>, no-interface view.
- * A business interface is not required if the enterprise bean exposes
- * a <b>local</b>, no-interface view.
+ * A business interface is not required if the enterprise bean exposes a <b>local</b>, no-interface view.
  * </p>
  */
 @Stateless
@@ -36,6 +35,7 @@ public class NoIntViBean {
      */
     @Inject
     public NoIntViBean(Logger logger) {
+        this();
         this.logger = logger;
     }
 
@@ -50,10 +50,10 @@ public class NoIntViBean {
      */
     public String check(String stamp) {
 
-        final String message = String.format("implementation[%s], stamp[%s], no-interface view stateless bean",
-                this.getClass().getSimpleName(), stamp);
+        final String message = "implementation[%s], stamp[%s], no-interface view stateless bean"
+                .formatted(this.getClass().getSimpleName(), stamp);
         if (logger.isLoggable(Level.INFO)) {
-            logger.info(String.format("check(): %s", message));
+            logger.info("check(): %s".formatted(message));
         }
         return message;
     }
